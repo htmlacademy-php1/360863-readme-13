@@ -39,6 +39,29 @@ $posts = [
     ]
 ];
 
+function cutText ($str, &$isCut, $length = 300)
+{
+    $isCut = false;
+    if ($str <= $length)
+    {
+        return $str;
+    }
+
+    $strArray = explode(' ', $str);
+    $textLength = 0;
+    foreach ($strArray as $index => $word)
+    {
+        $textLength = $textLength + mb_strlen($word);
+        if ($textLength >= $length)
+        {
+           $isCut = true;
+           return implode(" ", array_slice($strArray, 0, $index)) . '...';
+        }
+    }
+
+    return null;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -259,7 +282,12 @@ $posts = [
                         </blockquote>
 
                     <?php elseif($post['type_post'] == "post-text"): ?>
-                        <p><?=$post['content_post']; ?></p>
+                        <p>
+                            <?=cutText($post['content_post'], $wasTextCut); ?>
+                            <?php if($wasTextCut): ?>
+                                <a class="post-text__more-link" href="#">Читать далее</a>
+                            <?php endif; ?>
+                        </p>
 
                     <?php elseif($post['type_post'] == "post-photo"): ?>
                         <div class="post-photo__image-wrapper">
