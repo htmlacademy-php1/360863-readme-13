@@ -39,11 +39,11 @@ $posts = [
     ]
 ];
 
-function cutText ($str, &$isCut, $length = 300)
+function cutText ( $str, &$isCut, $length = 300)
 {
     $isCut = false;
 
-    if ($str <= $length)
+    if (mb_strlen($str) <= $length)
     {
         return $str;
     }
@@ -285,7 +285,7 @@ function cutText ($str, &$isCut, $length = 300)
 
                     <?php elseif($post['type_post'] == "post-text"): ?>
                         <p>
-                            <?= cutText($post['content_post'], $wasTextCut, 300); ?>
+                            <?=cutText($post['content_post'], $wasTextCut, 300); ?>
                             <?php if ($wasTextCut) : ?>
                                 <a class="post-text__more-link" href="#">Читать далее</a>
                             <?php endif; ?>
