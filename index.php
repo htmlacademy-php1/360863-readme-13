@@ -12,7 +12,7 @@ $posts = [
     [
         'title_post' => 'Игра престолов',
         'type_post' => 'post-text',
-        'content_post' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
+        'content_post' => 'Не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала,  не могу дождаться начала финального сезона своего любимого сериала',
         'username_post' => 'Владик',
         'avatar_post' => 'userpic.jpg',
     ],
@@ -38,6 +38,31 @@ $posts = [
         'avatar_post' => 'userpic.jpg',
     ]
 ];
+
+function cutText ( $str, &$isCut, $length = 300)
+{
+    $isCut = false;
+
+    if (mb_strlen($str) <= $length)
+    {
+        return $str;
+    }
+
+    $strArray = explode(' ', $str);
+    $textLength = 0;
+
+    foreach ($strArray as $index => $word)
+    {
+        $textLength += mb_strlen($word);
+        if ($textLength >= $length)
+        {
+           $isCut = true;
+           return implode(" ", array_slice($strArray, 0, $index)) . '...';
+        }
+    }
+
+    return null;
+}
 
 ?>
 <!DOCTYPE html>
@@ -259,7 +284,12 @@ $posts = [
                         </blockquote>
 
                     <?php elseif($post['type_post'] == "post-text"): ?>
-                        <p><?=$post['content_post']; ?></p>
+                        <p>
+                            <?=cutText($post['content_post'], $wasTextCut, 300); ?>
+                            <?php if ($wasTextCut) : ?>
+                                <a class="post-text__more-link" href="#">Читать далее</a>
+                            <?php endif; ?>
+                        </p>
 
                     <?php elseif($post['type_post'] == "post-photo"): ?>
                         <div class="post-photo__image-wrapper">
