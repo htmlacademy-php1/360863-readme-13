@@ -12,7 +12,7 @@ $posts = [
     [
         'title_post' => 'Игра престолов',
         'type_post' => 'post-text',
-        'content_post' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
+        'content_post' => 'Не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала,  не могу дождаться начала финального сезона своего любимого сериала',
         'username_post' => 'Владик',
         'avatar_post' => 'userpic.jpg',
     ],
@@ -42,6 +42,7 @@ $posts = [
 function cutText ($str, &$isCut, $length = 300)
 {
     $isCut = false;
+
     if ($str <= $length)
     {
         return $str;
@@ -49,9 +50,10 @@ function cutText ($str, &$isCut, $length = 300)
 
     $strArray = explode(' ', $str);
     $textLength = 0;
+
     foreach ($strArray as $index => $word)
     {
-        $textLength = $textLength + mb_strlen($word);
+        $textLength += mb_strlen($word);
         if ($textLength >= $length)
         {
            $isCut = true;
@@ -283,8 +285,8 @@ function cutText ($str, &$isCut, $length = 300)
 
                     <?php elseif($post['type_post'] == "post-text"): ?>
                         <p>
-                            <?=cutText($post['content_post'], $wasTextCut); ?>
-                            <?php if($wasTextCut): ?>
+                            <?= cutText($post['content_post'], $wasTextCut, 300); ?>
+                            <?php if ($wasTextCut) : ?>
                                 <a class="post-text__more-link" href="#">Читать далее</a>
                             <?php endif; ?>
                         </p>
