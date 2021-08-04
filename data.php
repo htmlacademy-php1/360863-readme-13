@@ -1,6 +1,6 @@
 <?php
-$is_auth = rand(0, 1);
-$user_name = 'Леонид'; // укажите здесь ваше имя
+$isAuth = rand(0, 1);
+$userName = 'Леонид'; // укажите здесь ваше имя
 $posts = [
     [
         'title_post' => 'Цитата',
