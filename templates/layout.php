@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="header__profile-name">
                                 <span>
-                                    <?= $userName; ?> <!--здесь должно быть имя пользователя-->
+                                    <?= esc($userName); ?> <!--здесь должно быть имя пользователя-->
                                 </span>
                                     <svg class="header__link-arrow" width="10" height="6">
                                         <use xlink:href="#icon-arrow-right-ad"></use>

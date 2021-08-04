@@ -91,21 +91,21 @@
         <?php foreach ($posts as $post): ?>
             <article class="popular__post post <?=$post['type_post'];?>">
                 <header class="post__header">
-                    <h2><?=$post['title_post'];?><!--здесь заголовок--></h2>
+                    <h2><?=esc($post['title_post']);?><!--здесь заголовок--></h2>
                 </header>
 
                 <div class="post__main"><!--здесь содержимое карточки-->
                     <?php if($post['type_post'] == "post-quote"): ?>
                         <blockquote>
                             <p>
-                                <?=$post['content_post']; ?><!--здесь текст-->
+                                <?=esc($post['content_post']); ?><!--здесь текст-->
                             </p>
                             <cite>Неизвестный Автор</cite>
                         </blockquote>
 
                     <?php elseif($post['type_post'] == "post-text"): ?>
                         <p>
-                            <?=cutText($post['content_post'], $wasTextCut, 300); ?>
+                            <?=cutText(esc($post['content_post']), $wasTextCut, 300); ?>
                             <?php if ($wasTextCut) : ?>
                                 <a class="post-text__more-link" href="#">Читать далее</a>
                             <?php endif; ?>
@@ -124,10 +124,10 @@
                                         <img src="https://www.google.com/s2/favicons?domain=vitadental.ru" alt="Иконка">
                                     </div>
                                     <div class="post-link__info">
-                                        <h3><?=$post['title_post']; ?><!--здесь заголовок--></h3>
+                                        <h3><?=esc($post['title_post']); ?><!--здесь заголовок--></h3>
                                     </div>
                                 </div>
-                                <span><?=$post['content_post']; ?><!--здесь ссылка--></span>
+                                <span><?=$post['content_post']; ?><!--здесь ссылка/а вот не понятно нужно функцию накладывать на ссылку?--></span>
                             </a>
                         </div>
                     <?php endif; ?>
@@ -141,7 +141,7 @@
                                 <img class="post__author-avatar" src="img/<?=$post['avatar_post'];?>" alt="Аватар пользователя">
                             </div>
                             <div class="post__info">
-                                <b class="post__author-name"><?=$post['username_post'];?><!--здесь имя пользоателя--></b>
+                                <b class="post__author-name"><?=esc($post['username_post']);?><!--здесь имя пользоателя--></b>
                                 <time class="post__time" datetime="">дата</time>
                             </div>
                         </a>
