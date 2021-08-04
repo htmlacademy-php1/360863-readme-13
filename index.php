@@ -6,7 +6,7 @@ $pageContent=include_template('main.php', ['posts' => $posts]);
 $layoutContent=include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
-    'is_auth' => $isAuth,
-    'user_name' => $userName,
+    'isAuth' => $isAuth,
+    'userName' => $userName,
 ]);
 echo ($layoutContent);
