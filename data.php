@@ -39,24 +39,23 @@ $posts = [
     ],
 ];
 
-function cutText ( $str, &$isCut, $length = 300)
+function cutText($str, &$isCut, $length = 300)
 {
     $isCut = false;
 
-    if (mb_strlen($str) <= $length)
-    {
+    if (mb_strlen($str) <= $length) {
+
         return $str;
     }
 
     $strArray = explode(' ', $str);
     $textLength = 0;
 
-    foreach ($strArray as $index => $word)
-    {
+    foreach ($strArray as $index => $word) {
         $textLength += mb_strlen($word);
-        if ($textLength >= $length)
-        {
+        if ($textLength >= $length){
             $isCut = true;
+
             return implode(" ", array_slice($strArray, 0, $index)) . '...';
         }
     }
