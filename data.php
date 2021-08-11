@@ -39,6 +39,9 @@ $posts = [
     ],
 ];
 
+$datePost = generate_random_date(4);
+
+
 function cutText($str, &$isCut, $length = 300)
 {
     $isCut = false;
@@ -68,3 +71,5 @@ function esc($str) {
 
     return $text;
 }
+
+

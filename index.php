@@ -1,4 +1,10 @@
 <?php
+/**
+ * @var bool $isAuth
+ * @var string $userName
+ * @var array $posts
+ */
+
 require_once('helpers.php');
 require_once('data.php');
 

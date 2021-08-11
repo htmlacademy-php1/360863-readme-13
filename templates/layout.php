@@ -1,3 +1,13 @@
+<?php
+/**
+* @var bool $isAuth
+* @var string $userName
+* @var string $title
+* @var string $content
+* @var array $posts
+*/
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
