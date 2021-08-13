@@ -100,6 +100,8 @@
     <div class="popular__posts">
 
         <?php foreach ($posts as $index => $post): ?>
+            <?php $today = new DateTimeImmutable(); ?>
+            <?php $postDate = new DateTime(generate_random_date ($index)); ?>
             <article class="popular__post post <?=$post['type_post'];?>">
                 <header class="post__header">
                     <h2><?=esc($post['title_post']);?><!--здесь заголовок--></h2>
@@ -153,16 +155,13 @@
                             </div>
                             <div class="post__info">
                                 <b class="post__author-name"><?=esc($post['username_post']);?><!--здесь имя пользоателя--></b>
-                                <time class="post__time" datetime="">
-                                    <?php $today = new DateTimeImmutable(); ?>
+                                <time class="post__time" datetime=" ">
 
-                                    <?php foreach ($posts as $index => $post): ?>
-                                        <?php $postDate = new DateTime(generate_random_date ($index)); ?>
                                         <?php $diff = $today->diff($postDate); ?>
 
                                         <?php if ($diff->days / 7 >= 5): ?>
                                             <?php $diffString = sprintf('%d %s', $diff->m, get_noun_plural_form($diff->m, ' месяц', ' месяца', ' месяцев')); ?>
-                                        <?php elseif ($diff->days / 7 > 1 && $diff->days / 7 < 5): ?>
+                                        <?php elseif ($diff->days / 7 >= 1 && $diff->days / 7 < 5): ?>
                                             <?php $weeks = floor($diff->days / 7); ?>
                                             <?php $diffString = sprintf('%d %s', $weeks, get_noun_plural_form($weeks, ' неделя', ' недели', ' недель')); ?>
                                         <?php elseif ($diff->days >= 1 && $diff->days < 7): ?>
@@ -174,7 +173,7 @@
                                         <?php endif; ?>
 
                                         <?=$diffString; ?>
-                                    <?php endforeach; ?>
+
                                 </time><!--здесь дата поста-->
                             </div>
                         </a>
