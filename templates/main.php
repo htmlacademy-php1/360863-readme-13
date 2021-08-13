@@ -148,7 +148,7 @@
                 </div>
                 <footer class="post__footer">
                     <div class="post__author">
-                        <a class="post__author-link" href="#" title="<?=date_format($postDate, "d-m-Y H:s") ?>">
+                        <a class="post__author-link" href="#" title="<?=date_format($postDate, "d-m-Y H:i") ?>">
                             <div class="post__avatar-wrapper">
                                 <!--укажите путь к файлу аватара-->
                                 <img class="post__author-avatar" src="img/<?=$post['avatar_post'];?>" alt="Аватар пользователя">
