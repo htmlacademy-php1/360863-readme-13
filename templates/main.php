@@ -160,16 +160,16 @@
                                         <?php $diff = $today->diff($postDate); ?>
 
                                         <?php if ($diff->m >= 1): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->m, get_noun_plural_form($diff->m, ' месяц', ' месяца', ' месяцев')); ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->m, get_noun_plural_form($diff->m, ' месяц назад', ' месяца назад', ' месяцев назад')); ?>
                                         <?php elseif ($diff->days / 7 >= 1 && $diff->days / 7 < 5): ?>
                                             <?php $weeks = floor($diff->days / 7); ?>
-                                            <?php $diffString = sprintf('%d %s', $weeks, get_noun_plural_form($weeks, ' неделя', ' недели', ' недель')); ?>
+                                            <?php $diffString = sprintf('%d %s', $weeks, get_noun_plural_form($weeks, ' неделя назад', ' недели назад', ' недель назад')); ?>
                                         <?php elseif ($diff->days >= 1 && $diff->days < 7): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->days, get_noun_plural_form($diff->d, ' день', ' дня', ' дней')); ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->days, get_noun_plural_form($diff->d, ' день назад', ' дня назад', ' дней назад')); ?>
                                         <?php elseif ($diff->h >= 1 && $diff->h < 24): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->h, get_noun_plural_form($diff->h, ' час', ' часа', ' часов')); ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->h, get_noun_plural_form($diff->h, ' час назад', ' часа назад', ' часов назад')); ?>
                                         <?php elseif ($diff->i < 60): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->i, get_noun_plural_form($diff->i, ' минута', ' минуты', ' минут')); ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->i, get_noun_plural_form($diff->i, ' минута назад', ' минуты назад', ' минут назад')); ?>
                                         <?php endif; ?>
 
                                         <?=$diffString; ?>
