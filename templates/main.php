@@ -159,7 +159,7 @@
 
                                         <?php $diff = $today->diff($postDate); ?>
 
-                                        <?php if ($diff->days / 7 >= 5): ?>
+                                        <?php if ($diff->m >= 1): ?>
                                             <?php $diffString = sprintf('%d %s', $diff->m, get_noun_plural_form($diff->m, ' месяц', ' месяца', ' месяцев')); ?>
                                         <?php elseif ($diff->days / 7 >= 1 && $diff->days / 7 < 5): ?>
                                             <?php $weeks = floor($diff->days / 7); ?>
