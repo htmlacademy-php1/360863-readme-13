@@ -1,3 +1,14 @@
+<?php
+/**
+ * @var bool $isAuth
+ * @var string $userName
+ * @var string $title
+ * @var string $content
+ * @var array $posts
+ * @var bool $wasTextCut * это вот значение же bool правильно?
+ */
+?>
+
 <div class="container">
     <h1 class="page__title page__title--popular">Популярное</h1>
 </div>
@@ -88,7 +99,9 @@
 
     <div class="popular__posts">
 
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($posts as $index => $post): ?>
+            <?php $today = new DateTimeImmutable(); ?>
+            <?php $postDate = new DateTime(generate_random_date ($index)); ?>
             <article class="popular__post post <?=$post['type_post'];?>">
                 <header class="post__header">
                     <h2><?=esc($post['title_post']);?><!--здесь заголовок--></h2>
@@ -135,14 +148,33 @@
                 </div>
                 <footer class="post__footer">
                     <div class="post__author">
-                        <a class="post__author-link" href="#" title="Автор">
+                        <a class="post__author-link" href="#" title="<?=date_format($postDate, "d-m-Y H:i") ?>">
                             <div class="post__avatar-wrapper">
                                 <!--укажите путь к файлу аватара-->
                                 <img class="post__author-avatar" src="img/<?=$post['avatar_post'];?>" alt="Аватар пользователя">
                             </div>
                             <div class="post__info">
                                 <b class="post__author-name"><?=esc($post['username_post']);?><!--здесь имя пользоателя--></b>
-                                <time class="post__time" datetime="">дата</time>
+                                <time class="post__time" datetime=" ">
+
+                                        <?php $diff = $today->diff($postDate); ?>
+
+                                        <?php if ($diff->m >= 1): ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->m, get_noun_plural_form($diff->m, ' месяц назад', ' месяца назад', ' месяцев назад')); ?>
+                                        <?php elseif ($diff->days / 7 >= 1 && $diff->days / 7 < 5): ?>
+                                            <?php $weeks = floor($diff->days / 7); ?>
+                                            <?php $diffString = sprintf('%d %s', $weeks, get_noun_plural_form($weeks, ' неделя назад', ' недели назад', ' недель назад')); ?>
+                                        <?php elseif ($diff->days >= 1 && $diff->days < 7): ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->days, get_noun_plural_form($diff->d, ' день назад', ' дня назад', ' дней назад')); ?>
+                                        <?php elseif ($diff->h >= 1 && $diff->h < 24): ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->h, get_noun_plural_form($diff->h, ' час назад', ' часа назад', ' часов назад')); ?>
+                                        <?php elseif ($diff->i < 60): ?>
+                                            <?php $diffString = sprintf('%d %s', $diff->i, get_noun_plural_form($diff->i, ' минута назад', ' минуты назад', ' минут назад')); ?>
+                                        <?php endif; ?>
+
+                                        <?=$diffString; ?>
+
+                                </time><!--здесь дата поста-->
                             </div>
                         </a>
                     </div>

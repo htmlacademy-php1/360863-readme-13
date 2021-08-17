@@ -39,6 +39,8 @@ $posts = [
     ],
 ];
 
+
+
 function cutText($str, &$isCut, $length = 300)
 {
     $isCut = false;
@@ -68,3 +70,5 @@ function esc($str) {
 
     return $text;
 }
+
+
