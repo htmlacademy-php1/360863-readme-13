@@ -8,68 +8,85 @@ CREATE TABLE IF NOT EXISTS `user` (
   id INT PRIMARY KEY AUTO_INCREMENT,
   created_at DATETIME NOT NULL DEFAULT NOW(),
   updated_at DATETIME NOT NULL DEFAULT NOW(),
-  login VARCHAR(255) NOT NULL UNIQUE, /*в задании стоит поле логин, хотя было бы логично что имя тоже нужно*/
+  login VARCHAR(255) NOT NULL UNIQUE,
+  user_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
-  password CHAR(32) NOT NULL, /*в задании написано что нужен хэшированный пароль.*/
+  password CHAR(32) NOT NULL,
   avatar VARCHAR(255) NOT NULL UNIQUE,
-  INDEX idx_user_username (login) /*я так понимаю что мы полю username добавили какой то индекс для быстрого поиска, а какой и где его посмотреть в самой таблице?*/
+  INDEX idx_user_username (login)
 );
 
 CREATE TABLE IF NOT EXISTS `hashtag` (
-  id INT PRIMARY KEY AUTO_INCREMENT, /*тут сомневаюсь не нужно было ставить id?*/
-  hashtag CHAR(32) NOT NULL UNIQUE
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  hashtag VARCHAR(127) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS `content_type` (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  `name` CHAR(32) NOT NULL UNIQUE,
-  class CHAR(32) NOT NULL UNIQUE
+  `name` VARCHAR(127) NOT NULL UNIQUE,
+  class VARCHAR(127) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `post` (
   id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(90) NOT NULL,
+  text TEXT,
+  quote_author VARCHAR(90),
+  image VARCHAR(255) UNIQUE,
+  youtube VARCHAR(255),
+  website VARCHAR(255),
+  views INT,
   created_at DATETIME NOT NULL DEFAULT NOW(),
   updated_at DATETIME NOT NULL DEFAULT NOW(),
-  title VARCHAR (90) NOT NULL,
-  text MEDIUMTEXT, /*ставить ли ограничение размера если просто текстовое поле, если да, так сколько символов?*/
-  quote_author VARCHAR (90),
-  image VARCHAR (255) UNIQUE,
-  youtube VARCHAR (255),
-  website VARCHAR (255),
-  views INT,
-  login VARCHAR(255),
-  FOREIGN KEY (login) REFERENCES `user`(login) ON DELETE CASCADE,
-  content_type_name CHAR(32),
-  FOREIGN KEY (content_type_name) REFERENCES content_type(`name`) ON DELETE CASCADE,
-  hashtag CHAR(32),
-  FOREIGN KEY (hashtag) REFERENCES hashtag(hashtag) ON DELETE CASCADE
+  user_id INT NOT NULL,
+  content_type_id INT NOT NULL,
+  FOREIGN KEY fk_post_user_id_user_id (user_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_post_content_type_id_content_type_id (content_type_id) REFERENCES content_type(id) ON DELETE CASCADE,
+  INDEX idx_post_content_type_id (content_type_id),
+  INDEX idx_post_content_type_id_user_id (user_id, content_type_id)
+);
+
+CREATE TABLE IF NOT EXISTS `post_hashtags` (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  post_id INT NOT NULL,
+  hashtag_id INT NOT NULL,
+  FOREIGN KEY fk_post_hashtags_post_id_post_id (post_id) REFERENCES post(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_post_hashtags_hashtag_id_hashtag_id (hashtag_id) REFERENCES hashtag(id) ON DELETE CASCADE,
+  INDEX idx_post_hashtags_post_id (post_id),
+  INDEX idx_post_hashtags_hashtag_id (hashtag_id)
 );
 
 CREATE TABLE IF NOT EXISTS `comment` (
   id INT PRIMARY KEY AUTO_INCREMENT,
   created_at DATETIME NOT NULL DEFAULT NOW(),
   updated_at DATETIME NOT NULL DEFAULT NOW(),
-  comment TEXT (90) NOT NULL, /* тоже не понятно какое ограничение ставить*/
-  login VARCHAR(255),
-  FOREIGN KEY (login) REFERENCES `user`(login) ON DELETE CASCADE,
-  post_id INT,
-  FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE
+  comment TEXT NOT NULL,
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  FOREIGN KEY fk_comment_user_id_user_id (user_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_comment_post_id_post_id (post_id) REFERENCES post(id) ON DELETE CASCADE,
+  INDEX idx_comment_user_id (user_id),
+  INDEX idx_comment_post_id (post_id)
 );
 
 CREATE TABLE IF NOT EXISTS `like` (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  login VARCHAR(255),
-  FOREIGN KEY (login) REFERENCES `user`(login) ON DELETE CASCADE,
-  post_id INT,
-  FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  FOREIGN KEY fk_like_user_id_user_id (user_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_like_post_id_post_id (post_id) REFERENCES post(id) ON DELETE CASCADE,
+  INDEX idx_like_user_id (user_id),
+  INDEX idx_like_post_id (post_id)
 );
 
 CREATE TABLE IF NOT EXISTS `subscription` (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  author VARCHAR(255),
-  FOREIGN KEY (author) REFERENCES `user`(login) ON DELETE CASCADE,
-  person_subscripted VARCHAR(255),
-  FOREIGN KEY (person_subscripted) REFERENCES `user`(login) ON DELETE CASCADE
+  author_id INT NOT NULL,
+  person_subscripted_id INT NOT NULL,
+  FOREIGN KEY fk_subscription_author_id_user_id (author_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_subscription_person_subscripted_id_user_id (person_subscripted_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  INDEX idx_subscription_author_id (author_id),
+  INDEX idx_subscription_person_subscripted_id (person_subscripted_id)
 );
 
 CREATE TABLE IF NOT EXISTS `message` (
@@ -77,10 +94,12 @@ CREATE TABLE IF NOT EXISTS `message` (
   created_at DATETIME NOT NULL DEFAULT NOW(),
   updated_at DATETIME NOT NULL DEFAULT NOW(),
   text MEDIUMTEXT NOT NULL,
-  author VARCHAR(255),
-  FOREIGN KEY (author) REFERENCES `user`(login) ON DELETE CASCADE,
-  person_recived VARCHAR(255),
-  FOREIGN KEY (person_recived) REFERENCES `user`(login) ON DELETE CASCADE
+  author_id INT NOT NULL,
+  person_recived_id INT NOT NULL,
+  FOREIGN KEY fk_message_author_id_user_id (author_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_message_person_recived_id_user_id (person_recived_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  INDEX idx_message_author_id (author_id),
+  INDEX idx_message_person_person_recived_id (person_recived_id)
 );
 
 
