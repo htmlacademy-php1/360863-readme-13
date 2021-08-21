@@ -65,18 +65,15 @@ INSERT INTO subscription (author_id, person_subscripted_id)
 
 /* Задание: получить список постов для конкретного пользователя; */
 
-SELECT p.*, us.user_name
-FROM post p
-INNER JOIN `user` us ON p.user_id = us.id
-WHERE  us.user_name='Лариса';
+SELECT * FROM post WHERE user_id = 1;
+
 
 
 /* Задание: получить список комментариев для одного поста, в комментариях должен быть логин пользователя; */
-SELECT comment.comment, user.login, post.id
+SELECT comment.comment, user.login
 FROM comment
 INNER JOIN `user` ON comment.user_id = user.id
-INNER JOIN post ON comment.post_id = post.id
-WHERE post_id = 3;
+WHERE comment.post_id = 3;
 
 /* Задание: получить список постов с сортировкой по популярности и вместе с именами авторов и типом контента; */
 /* если под популярностью понимается количество просмотров, то добавляем количество просмотров к постам */
@@ -93,3 +90,17 @@ INNER JOIN content_type ON post.content_type_id = content_type.id
 ORDER BY views DESC;
 
 /* а если под популярностью понимается количество лайков, что логичнее, то не понятно как сделать. По идее надо сначала сделать связь с таблицей лайков, правильно? А потом посчитать количество лайков у каждого поста и отсортировать по этому значению, но это какая то жесть */
+SELECT post.*, user.user_name, content_type.name
+FROM post
+INNER JOIN `user` ON post.user_id = user.id
+INNER JOIN content_type ON post.content_type_id = content_type.id
+LEFT JOIN `like` ON `like`.post_id = post.id
+GROUP BY post.id
+ORDER BY COUNT(`like`.id) DESC;
+
+
+
+
+
+
+
