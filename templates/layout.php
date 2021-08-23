@@ -4,7 +4,8 @@
 * @var string $userName
 * @var string $title
 * @var string $content
-* @var array $posts
+* @var array $rows
+* @var array $rowsContents
 */
 ?>
 

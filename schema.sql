@@ -27,13 +27,14 @@ CREATE TABLE IF NOT EXISTS `content_type` (
   class VARCHAR(127) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS `post` (
+CREATE TABLE IF NOT EXISTS `posts` (
   id INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(90) NOT NULL,
   text TEXT,
   quote_author VARCHAR(90),
   image VARCHAR(255) UNIQUE,
   youtube VARCHAR(255),
+  website_title VARCHAR(255),
   website VARCHAR(255),
   views INT,
   created_at DATETIME NOT NULL DEFAULT NOW(),
@@ -50,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   id INT PRIMARY KEY AUTO_INCREMENT,
   post_id INT NOT NULL,
   hashtag_id INT NOT NULL,
-  FOREIGN KEY fk_post_hashtags_post_id_post_id (post_id) REFERENCES post(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_post_hashtags_post_id_post_id (post_id) REFERENCES posts(id) ON DELETE CASCADE,
   FOREIGN KEY fk_post_hashtags_hashtag_id_hashtag_id (hashtag_id) REFERENCES hashtag(id) ON DELETE CASCADE,
   INDEX idx_post_hashtags_post_id (post_id),
   INDEX idx_post_hashtags_hashtag_id (hashtag_id)
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   user_id INT NOT NULL,
   post_id INT NOT NULL,
   FOREIGN KEY fk_comment_user_id_user_id (user_id) REFERENCES `user`(id) ON DELETE CASCADE,
-  FOREIGN KEY fk_comment_post_id_post_id (post_id) REFERENCES post(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_comment_post_id_post_id (post_id) REFERENCES posts(id) ON DELETE CASCADE,
   INDEX idx_comment_user_id (user_id),
   INDEX idx_comment_post_id (post_id)
 );
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `like` (
   user_id INT NOT NULL,
   post_id INT NOT NULL,
   FOREIGN KEY fk_like_user_id_user_id (user_id) REFERENCES `user`(id) ON DELETE CASCADE,
-  FOREIGN KEY fk_like_post_id_post_id (post_id) REFERENCES post(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_like_post_id_post_id (post_id) REFERENCES posts(id) ON DELETE CASCADE,
   INDEX idx_like_user_id (user_id),
   INDEX idx_like_post_id (post_id)
 );

@@ -25,13 +25,13 @@ INSERT INTO content_type (name, class)
   ('Ссылка', 'link');
 
 /* Задание: добавить существующие посты */
-INSERT INTO post (title, text, quote_author, image, youtube, website, user_id, content_type_id)
+INSERT INTO posts (title, text, quote_author, image, youtube, website_title, website, user_id, content_type_id)
   VALUES
-  ('Цитата', 'Мы в жизни любим только раз, а после ищем лишь похожих', 'Неизвестный Автор', NULL, NULL, NULL, 1, 2),
-  ('Игра престолов', 'Не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала,  не могу дождаться начала финального сезона своего любимого сериала', NULL, NULL, NULL, NULL, 2, 1),
-  ('Наконец, обработал фотки!', NULL, NULL, 'rock-medium.jpg', NULL, NULL, 3, 3),
-  ('Моя мечта', NULL, NULL, 'coast-medium.jpg', NULL, NULL, 1, 3),
-  ('Лучшие курсы', NULL, NULL, NULL, NULL, 'www.htmlacademy.ru', 2, 5);
+  ('Цитата', 'Мы в жизни любим только раз, а после ищем лишь похожих', 'Неизвестный Автор', NULL, NULL, NULL, NULL, 1, 2),
+  ('Игра престолов', 'Не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала,  не могу дождаться начала финального сезона своего любимого сериала', NULL, NULL, NULL, NULL, NULL, 2, 1),
+  ('Наконец, обработал фотки!', NULL, NULL, 'rock-medium.jpg', NULL, NULL, NULL, 3, 3),
+  ('Моя мечта', NULL, NULL, 'coast-medium.jpg', NULL, NULL, NULL, 1, 3),
+  ('Лучшие курсы', NULL, NULL, NULL, NULL, 'Лучшие курсы', 'www.htmlacademy.ru', 2, 5);
 
 /* Задание: придумать пару комментариев к существующим постам */
 INSERT INTO comment (comment, user_id, post_id)
@@ -65,7 +65,7 @@ INSERT INTO subscription (author_id, person_subscripted_id)
 
 /* Задание: получить список постов для конкретного пользователя; */
 
-SELECT * FROM post WHERE user_id = 1;
+SELECT * FROM posts WHERE user_id = 1;
 
 
 
@@ -77,25 +77,25 @@ WHERE comment.post_id = 3;
 
 /* Задание: получить список постов с сортировкой по популярности и вместе с именами авторов и типом контента; */
 /* если под популярностью понимается количество просмотров, то добавляем количество просмотров к постам */
-UPDATE post SET views = 1 WHERE id = 1;
-UPDATE post SET views = 2 WHERE id = 2;
-UPDATE post SET views = 3 WHERE id = 3;
-UPDATE post SET views = 4 WHERE id = 4;
-UPDATE post SET views = 5 WHERE id = 5;
+UPDATE posts SET views = 1 WHERE id = 1;
+UPDATE posts SET views = 2 WHERE id = 2;
+UPDATE posts SET views = 3 WHERE id = 3;
+UPDATE posts SET views = 4 WHERE id = 4;
+UPDATE posts SET views = 5 WHERE id = 5;
 
-SELECT post.*, user.user_name, content_type.name
-FROM post
-INNER JOIN `user` ON post.user_id = user.id
-INNER JOIN content_type ON post.content_type_id = content_type.id
+SELECT posts.*, user.user_name, content_type.name
+FROM posts
+INNER JOIN `user` ON posts.user_id = user.id
+INNER JOIN content_type ON posts.content_type_id = content_type.id
 ORDER BY views DESC;
 
 /* а если под популярностью понимается количество лайков, что логичнее, то не понятно как сделать. По идее надо сначала сделать связь с таблицей лайков, правильно? А потом посчитать количество лайков у каждого поста и отсортировать по этому значению, но это какая то жесть */
-SELECT post.*, user.user_name, content_type.name
-FROM post
-INNER JOIN `user` ON post.user_id = user.id
-INNER JOIN content_type ON post.content_type_id = content_type.id
-LEFT JOIN `like` ON `like`.post_id = post.id
-GROUP BY post.id
+SELECT posts.*, user.user_name, content_type.name
+FROM posts
+INNER JOIN `user` ON posts.user_id = user.id
+INNER JOIN content_type ON posts.content_type_id = content_type.id
+LEFT JOIN `like` ON `like`.post_id = posts.id
+GROUP BY posts.id
 ORDER BY COUNT(`like`.id) DESC;
 
 
