@@ -4,7 +4,7 @@
  * @var string $userName
  * @var string $title
  * @var string $content
- * @var array $posts
+ * @var array $rows
  * @var bool $wasTextCut * это вот значение же bool правильно?
  */
 ?>
@@ -51,46 +51,16 @@
                         <span>Все</span>
                     </a>
                 </li>
+                <?php foreach ($rowsContents as $rowsContent): ?>
                 <li class="popular__filters-item filters__item">
                     <a class="filters__button filters__button--photo button" href="#">
-                        <span class="visually-hidden">Фото</span>
+                        <span class="visually-hidden"><?=$rowsContent['name'];?></span>
                         <svg class="filters__icon" width="22" height="18">
-                            <use xlink:href="#icon-filter-photo"></use>
+                            <use xlink:href="#icon-filter-<?=$rowsContent['class'];?>"></use>
                         </svg>
                     </a>
                 </li>
-                <li class="popular__filters-item filters__item">
-                    <a class="filters__button filters__button--video button" href="#">
-                        <span class="visually-hidden">Видео</span>
-                        <svg class="filters__icon" width="24" height="16">
-                            <use xlink:href="#icon-filter-video"></use>
-                        </svg>
-                    </a>
-                </li>
-                <li class="popular__filters-item filters__item">
-                    <a class="filters__button filters__button--text button" href="#">
-                        <span class="visually-hidden">Текст</span>
-                        <svg class="filters__icon" width="20" height="21">
-                            <use xlink:href="#icon-filter-text"></use>
-                        </svg>
-                    </a>
-                </li>
-                <li class="popular__filters-item filters__item">
-                    <a class="filters__button filters__button--quote button" href="#">
-                        <span class="visually-hidden">Цитата</span>
-                        <svg class="filters__icon" width="21" height="20">
-                            <use xlink:href="#icon-filter-quote"></use>
-                        </svg>
-                    </a>
-                </li>
-                <li class="popular__filters-item filters__item">
-                    <a class="filters__button filters__button--link button" href="#">
-                        <span class="visually-hidden">Ссылка</span>
-                        <svg class="filters__icon" width="21" height="18">
-                            <use xlink:href="#icon-filter-link"></use>
-                        </svg>
-                    </a>
-                </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
@@ -99,37 +69,37 @@
 
     <div class="popular__posts">
 
-        <?php foreach ($posts as $index => $post): ?>
+        <?php foreach ($rows as $index => $row): ?>
             <?php $today = new DateTimeImmutable(); ?>
             <?php $postDate = new DateTime(generate_random_date ($index)); ?>
-            <article class="popular__post post <?=$post['type_post'];?>">
+            <article class="popular__post post post-<?=$row['content_class'];?>">
                 <header class="post__header">
-                    <h2><?=esc($post['title_post']);?><!--здесь заголовок--></h2>
+                    <h2><?=esc($row['post_title']);?><!--здесь заголовок--></h2>
                 </header>
 
                 <div class="post__main"><!--здесь содержимое карточки-->
-                    <?php if($post['type_post'] == "post-quote"): ?>
+                    <?php if($row['content_class'] == "quote"): ?>
                         <blockquote>
                             <p>
-                                <?=esc($post['content_post']); ?><!--здесь текст-->
+                                <?=esc($row['post_text']); ?><!--здесь текст-->
                             </p>
-                            <cite>Неизвестный Автор</cite>
+                            <cite><?=esc($row['post_quote_author']); ?></cite><!--здесь Автор цитаты-->
                         </blockquote>
 
-                    <?php elseif($post['type_post'] == "post-text"): ?>
+                    <?php elseif($row['content_class'] == "text"): ?>
                         <p>
-                            <?=cutText(esc($post['content_post']), $wasTextCut, 300); ?>
+                            <?=cutText(esc($row['post_text']), $wasTextCut, 300); ?>
                             <?php if ($wasTextCut) : ?>
                                 <a class="post-text__more-link" href="#">Читать далее</a>
                             <?php endif; ?>
                         </p>
 
-                    <?php elseif($post['type_post'] == "post-photo"): ?>
+                    <?php elseif($row['content_class'] == "photo"): ?>
                         <div class="post-photo__image-wrapper">
-                            <img src="img/<?=$post['content_post']; ?>" alt="Фото от пользователя" width="360" height="240">
+                            <img src="img/<?=$row['post_image']; ?>" alt="Фото от пользователя" width="360" height="240">
                         </div>
 
-                    <?php elseif($post['type_post'] == "post-link"): ?>
+                    <?php elseif($row['content_class'] == "link"): ?>
                         <div class="post-link__wrapper">
                             <a class="post-link__external" href="http://" title="Перейти по ссылке">
                                 <div class="post-link__info-wrapper">
@@ -137,10 +107,10 @@
                                         <img src="https://www.google.com/s2/favicons?domain=vitadental.ru" alt="Иконка">
                                     </div>
                                     <div class="post-link__info">
-                                        <h3><?=esc($post['title_post']); ?><!--здесь заголовок--></h3>
+                                        <h3><?=esc($row['post_website_title']); ?><!--здесь заголовок--></h3>
                                     </div>
                                 </div>
-                                <span><?=$post['content_post']; ?><!--здесь ссылка/а вот не понятно нужно функцию накладывать на ссылку?--></span>
+                                <span><?=$row['post_website']; ?><!--здесь ссылка/а вот не понятно нужно функцию накладывать на ссылку?--></span>
                             </a>
                         </div>
                     <?php endif; ?>
@@ -151,10 +121,10 @@
                         <a class="post__author-link" href="#" title="<?=date_format($postDate, "d-m-Y H:i") ?>">
                             <div class="post__avatar-wrapper">
                                 <!--укажите путь к файлу аватара-->
-                                <img class="post__author-avatar" src="img/<?=$post['avatar_post'];?>" alt="Аватар пользователя">
+                                <img class="post__author-avatar" src="img/<?=$row['user_avatar'];?>" alt="Аватар пользователя">
                             </div>
                             <div class="post__info">
-                                <b class="post__author-name"><?=esc($post['username_post']);?><!--здесь имя пользоателя--></b>
+                                <b class="post__author-name"><?=esc($row['user_name']);?><!--здесь имя пользоателя--></b>
                                 <time class="post__time" datetime=" ">
 
                                         <?php $diff = $today->diff($postDate); ?>
