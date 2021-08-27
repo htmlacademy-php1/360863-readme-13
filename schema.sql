@@ -90,6 +90,16 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   INDEX idx_subscription_person_subscripted_id (person_subscripted_id)
 );
 
+CREATE TABLE IF NOT EXISTS `repost` (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  FOREIGN KEY fk_repost_user_id_user_id (user_id) REFERENCES `user`(id) ON DELETE CASCADE,
+  FOREIGN KEY fk_repost_post_id_post_id (post_id) REFERENCES `posts`(id) ON DELETE CASCADE,
+  INDEX idx_repost_user_id (user_id),
+  INDEX idx_repost_post_id (post_id)
+);
+
 CREATE TABLE IF NOT EXISTS `message` (
   id INT PRIMARY KEY AUTO_INCREMENT,
   created_at DATETIME NOT NULL DEFAULT NOW(),

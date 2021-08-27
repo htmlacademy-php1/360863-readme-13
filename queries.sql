@@ -99,8 +99,82 @@ GROUP BY posts.id
 ORDER BY COUNT(`like`.id) DESC;
 
 
+/* Добавляем хэштеги */
+INSERT INTO hashtag (hashtag)
+VALUES
+  ('#nature'),
+  ('#globe'),
+  ('#photooftheday'),
+  ('#canon'),
+  ('#landscape'),
+  ('#щикарныйвид');
+
+/* Добавляем хэштеги к посту*/
+
+INSERT INTO post_hashtags (post_id, hashtag_id)
+VALUES
+  (3, 1),
+  (3, 2),
+  (3, 3),
+  (3, 4),
+  (3, 5),
+  (3, 6);
+
+/* Добавляем подписчиков */
+
+INSERT INTO subscription (author_id, person_subscripted_id)
+VALUES
+  (3, 1),
+  (3, 2);
+
+INSERT INTO subscription (author_id, person_subscripted_id)
+VALUES
+  (1, 2);
+
+INSERT INTO subscription (author_id, person_subscripted_id)
+VALUES
+  (2, 1),
+  (2, 3);
+
+/* Добавляем подписчиков */
+
+INSERT INTO `like` (user_id, post_id)
+VALUES
+  (1, 3),
+  (2, 3),
+  (3, 1),
+  (1, 5),
+  (1, 4);
 
 
+/* Добавляем репосты */
+
+INSERT INTO repost (user_id, post_id)
+VALUES
+  (1, 3),
+  (2, 3),
+  (3, 1),
+  (1, 2),
+  (3, 5);
+
+/* Добавляем комментарии */
+
+INSERT INTO comment (comment, user_id, post_id)
+VALUES
+  ('Красота!!!!', 1, 3),
+  ('Озеро Байкал – огромное древнее озеро в горах Сибири к северу от монгольской границы. Байкал считается самым глубоким озером в мире. Он окружен сетью пешеходных маршрутов, называемых Большой байкальской тропой. Деревня Листвянка, расположенная на западном берегу озера, – популярная отправная точка для летних экскурсий. Зимой здесь можно кататься на коньках и собачьих упряжках', 1, 3);
 
 
+INSERT INTO comment (comment, user_id, post_id)
+VALUES
+  ('Тоже там был прошлой зимой', 4, 3);
 
+INSERT INTO `like` (user_id, post_id)
+VALUES
+       (1, 3),
+       (2, 3),
+       (1, 4),
+       (3, 5),
+       (4, 1),
+       (4, 3),
+       (2, 1);
