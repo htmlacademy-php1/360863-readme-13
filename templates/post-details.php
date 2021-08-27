@@ -12,51 +12,51 @@
             <div class="post-details__wrapper post-photo">
                 <div class="post-details__main-block post post--details">
                     <?php if($postNums['content_class'] == 'photo'): ?>
-                    <div class="post-details__image-wrapper post-photo__image-wrapper">
-                        <img src="img/<?=$postNums['post_image']; ?>" alt="Фото от пользователя" width="760" height="507">
-                    </div>
+                        <div class="post-details__image-wrapper post-photo__image-wrapper">
+                            <img src="img/<?=$postNums['post_image']; ?>" alt="Фото от пользователя" width="760" height="507">
+                        </div>
 
                     <?php elseif($postNums['content_class'] == 'text'): ?>
-                    <div class="post-details__image-wrapper post-text">
-                        <div class="post__main">
-                            <p>
-                                <?=$postNums['post_text'];?>
-                            </p>
-                        </div>
-                    </div>
-
-                    <?php elseif($postNums['content_class'] == 'quote'): ?>
-                    <div class="post-details__image-wrapper post-quote">
-                        <div class="post__main">
-                            <blockquote>
+                        <div class="post-details__image-wrapper post-text">
+                            <div class="post__main">
                                 <p>
                                     <?=$postNums['post_text'];?>
                                 </p>
-                                <cite><?=$postNums['post_quote_author'];?></cite>
-                            </blockquote>
+                            </div>
                         </div>
-                    </div>
+
+                    <?php elseif($postNums['content_class'] == 'quote'): ?>
+                        <div class="post-details__image-wrapper post-quote">
+                            <div class="post__main">
+                                <blockquote>
+                                    <p>
+                                        <?=$postNums['post_text'];?>
+                                    </p>
+                                    <cite><?=$postNums['post_quote_author'];?></cite>
+                                </blockquote>
+                            </div>
+                        </div>
 
                     <?php elseif($postNums['content_class'] == 'link'): ?>
-                    <div class="post__main">
-                        <div class="post-link__wrapper">
-                            <a class="post-link__external" href="http://<?=$postNums['post_website'];?>" title="Перейти по ссылке">
-                                <div class="post-link__info-wrapper">
-                                    <div class="post-link__icon-wrapper">
-                                        <img src="https://www.google.com/s2/favicons?domain=<?=$postNums['post_website'];?>" alt="Иконка">
+                        <div class="post__main">
+                            <div class="post-link__wrapper">
+                                <a class="post-link__external" href="http://<?=$postNums['post_website'];?>" title="Перейти по ссылке">
+                                    <div class="post-link__info-wrapper">
+                                        <div class="post-link__icon-wrapper">
+                                            <img src="https://www.google.com/s2/favicons?domain=<?=$postNums['post_website'];?>" alt="Иконка">
+                                        </div>
+                                        <div class="post-link__info">
+                                            <h3><?=$postNums['post_website_title'];?></h3>
+                                        </div>
                                     </div>
-                                    <div class="post-link__info">
-                                        <h3><?=$postNums['post_website_title'];?></h3>
-                                    </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
                     <?php elseif($postNums['content_class'] == 'video'): ?>
-                    <div class="post-details__image-wrapper post-photo__image-wrapper">
-                        <?=embed_youtube_video($postNums['post_youtube']); ?>
-                    </div>
+                        <div class="post-details__image-wrapper post-photo__image-wrapper">
+                            <?=embed_youtube_video($postNums['post_youtube']); ?>
+                        </div>
                     <?php endif; ?>
                     <div class="post__indicators">
                         <div class="post__buttons">
@@ -142,7 +142,7 @@
                                             <time class="comments__time" datetime="2019-03-18">2 дня назад</time>
                                         </div>
                                         <p class="comments__text">
-                                            Озеро Байкал – огромное древнее озеро в горах Сибири к северу от монгольской границы. Байкал считается самым глубоким озером в мире. Он окружен сетью пешеходных маршрутов, называемых Большой байкальской тропой. Деревня Листвянка, расположенная на западном берегу озера, – популярная отправная точка для летних экскурсий. Зимой здесь можно кататься на коньках и собачьих упряжках.
+                                            Озеро Байкал – огромное древнее озеро в горах Сибири к северу от монгольской границы. Байкал считается самым глубоким озером в мире. Он окружен сетью пешеходных маршрутов, называемых Большой байкальской тропой. Деревня Листвянка, расположенная на западном берегу озера, – популярная отправная точка для летних экскурсий. Зимой здесь можно кататься на коньках и собачьих упряжках.
                                         </p>
                                     </div>
                                 </li>

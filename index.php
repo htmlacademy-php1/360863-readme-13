@@ -1,3 +1,4 @@
+
 <?php
 /**
  * @var bool $isAuth

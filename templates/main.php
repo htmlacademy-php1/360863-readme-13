@@ -47,15 +47,15 @@
         <div class="popular__filters filters">
             <b class="popular__filters-caption filters__caption">Тип контента:</b>
             <ul class="popular__filters-list filters__list">
-                    <li class="popular__filters-item popular__filters-item--all filters__item filters__item--all">
-                        <a class="filters__button filters__button--ellipse filters__button--all <?=$selectedContentType ? '' : 'filters__button--active'; ?>" href="/">
-                            <span>Все</span>
-                        </a>
-                    </li>
-                    <?php foreach ($rowsContents as $rowsContent): ?>
+                <li class="popular__filters-item popular__filters-item--all filters__item filters__item--all">
+                    <a class="filters__button filters__button--ellipse filters__button--all <?=$selectedContentType ? '' : 'filters__button--active'; ?>" href="/">
+                        <span>Все</span>
+                    </a>
+                </li>
+                <?php foreach ($rowsContents as $rowsContent): ?>
                     <li class="popular__filters-item filters__item">
                         <a class="filters__button filters__button--photo button <?=$selectedContentType == $rowsContent['id'] ? 'filters__button--active': '';?> " href="<?='index.php?class=' . $rowsContent['id'];?> ">
-<!--                            --><?php /*if ($selectedContentType == $rowsContent['id']) {
+                            <!--                            --><?php /*if ($selectedContentType == $rowsContent['id']) {
                                 echo 'filters__button--active';
                             }
                             else {
@@ -68,7 +68,7 @@
                             </svg>
                         </a>
                     </li>
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
@@ -135,22 +135,22 @@
                                 <b class="post__author-name"><?=esc($row['user_name']);?><!--здесь имя пользоателя--></b>
                                 <time class="post__time" datetime=" ">
 
-                                        <?php $diff = $today->diff($postDate); ?>
+                                    <?php $diff = $today->diff($postDate); ?>
 
-                                        <?php if ($diff->m >= 1): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->m, get_noun_plural_form($diff->m, ' месяц назад', ' месяца назад', ' месяцев назад')); ?>
-                                        <?php elseif ($diff->days / 7 >= 1 && $diff->days / 7 < 5): ?>
-                                            <?php $weeks = floor($diff->days / 7); ?>
-                                            <?php $diffString = sprintf('%d %s', $weeks, get_noun_plural_form($weeks, ' неделя назад', ' недели назад', ' недель назад')); ?>
-                                        <?php elseif ($diff->days >= 1 && $diff->days < 7): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->days, get_noun_plural_form($diff->d, ' день назад', ' дня назад', ' дней назад')); ?>
-                                        <?php elseif ($diff->h >= 1 && $diff->h < 24): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->h, get_noun_plural_form($diff->h, ' час назад', ' часа назад', ' часов назад')); ?>
-                                        <?php elseif ($diff->i < 60): ?>
-                                            <?php $diffString = sprintf('%d %s', $diff->i, get_noun_plural_form($diff->i, ' минута назад', ' минуты назад', ' минут назад')); ?>
-                                        <?php endif; ?>
+                                    <?php if ($diff->m >= 1): ?>
+                                        <?php $diffString = sprintf('%d %s', $diff->m, get_noun_plural_form($diff->m, ' месяц назад', ' месяца назад', ' месяцев назад')); ?>
+                                    <?php elseif ($diff->days / 7 >= 1 && $diff->days / 7 < 5): ?>
+                                        <?php $weeks = floor($diff->days / 7); ?>
+                                        <?php $diffString = sprintf('%d %s', $weeks, get_noun_plural_form($weeks, ' неделя назад', ' недели назад', ' недель назад')); ?>
+                                    <?php elseif ($diff->days >= 1 && $diff->days < 7): ?>
+                                        <?php $diffString = sprintf('%d %s', $diff->days, get_noun_plural_form($diff->d, ' день назад', ' дня назад', ' дней назад')); ?>
+                                    <?php elseif ($diff->h >= 1 && $diff->h < 24): ?>
+                                        <?php $diffString = sprintf('%d %s', $diff->h, get_noun_plural_form($diff->h, ' час назад', ' часа назад', ' часов назад')); ?>
+                                    <?php elseif ($diff->i < 60): ?>
+                                        <?php $diffString = sprintf('%d %s', $diff->i, get_noun_plural_form($diff->i, ' минута назад', ' минуты назад', ' минут назад')); ?>
+                                    <?php endif; ?>
 
-                                        <?=$diffString; ?>
+                                    <?=$diffString; ?>
 
                                 </time><!--здесь дата поста-->
                             </div>
@@ -181,4 +181,4 @@
             </article>
         <?php endforeach; ?>
     </div>
-</div>
+</div><?php

@@ -35,6 +35,4 @@ $layoutContent = include_template('layout.php', [
 ]);
 
 
-    echo $layoutContent;
-
-
+echo $layoutContent;

@@ -166,7 +166,8 @@ COUNT(`comment`.`comment`) nember_comment,
 posts.id post_id
 FROM `comment`
 INNER JOIN posts ON comment.post_id=posts.id
-{$postNumberId};
+{$postNumberId}
+GROUP BY post_id;
 SQL;
 $resultCommentSum = mysqli_query($link, $sqlCommentSum);
 $postCommentSum = mysqli_fetch_assoc($resultCommentSum);
@@ -287,5 +288,3 @@ function esc($str) {
 
     return $text;
 }
-
-
