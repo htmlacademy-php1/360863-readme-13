@@ -1,3 +1,4 @@
+
 <?php
 /**
  * @var bool $isAuth
@@ -10,10 +11,19 @@ require_once('helpers.php');
 require_once('data.php');
 
 /*echo '<pre>';
-print_r($rowsContent);
+print_r($rows);
 die();*/
 
-$pageContent = include_template('main.php', ['rows' => $rows,'rowsContents' => $rowsContents]);
+$pageContent = include_template('main.php', [
+    'rows' => $rows,
+    'rowsContents' => $rowsContents,
+    'paramsIndex' => $paramsIndex,
+    'urlSort' => $urlSort,
+    'selectedContentType' => $_GET['class'] ?? null,
+
+
+]);
+
 $layoutContent = include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
