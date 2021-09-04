@@ -11,7 +11,7 @@ require_once('helpers.php');
 require_once('data.php');
 
 /*echo '<pre>';
-print_r($rows);
+print_r($rowsContents);
 die();*/
 
 $pageContent = include_template('main.php', [
