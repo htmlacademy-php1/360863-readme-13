@@ -109,6 +109,9 @@ VALUES
   ('#landscape'),
   ('#щикарныйвид');
 
+
+
+
 /* Добавляем хэштеги к посту*/
 
 INSERT INTO post_hashtags (post_id, hashtag_id)

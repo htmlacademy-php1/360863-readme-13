@@ -33,6 +33,8 @@
                 micro blogging
             </p>
         </div>
+<!--        --><?php /*var_dump(basename($_SERVER['SCRIPT_FILENAME'])); */?>
+        <?php if (basename($_SERVER['SCRIPT_FILENAME']) !== 'reg.php'): ?>
         <form class="header__search-form form" action="#" method="get">
             <div class="header__search">
                 <label class="visually-hidden">Поиск</label>
@@ -115,8 +117,20 @@
                             <a class="header__post-button button button--transparent" href="adding-post.html">Пост</a>
                         </li>
                     </ul>
+                    <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if (basename($_SERVER['SCRIPT_FILENAME']) == 'reg.php'): ?>
+                    <ul class="header__user-nav">
+                        <li class="header__authorization">
+                            <a href="/" class="header__user-button header__authorization-button button">Вход</a>
+                        </li>
+                        <li>
+                            <a class="header__user-button header__user-button--active header__register-button button">Регистрация</a>
+                        </li>
+                    </ul>
+                    <?php endif; ?>
                 </nav>
-            <?php endif; ?>
+
         </div>
     </div>
 </header>

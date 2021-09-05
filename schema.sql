@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `user` (
                                     created_at DATETIME NOT NULL DEFAULT NOW(),
                                     updated_at DATETIME NOT NULL DEFAULT NOW(),
                                     login VARCHAR(255) NOT NULL UNIQUE,
-                                    user_name VARCHAR(255) NOT NULL,
+                                    user_name VARCHAR(255),
                                     email VARCHAR(255) NOT NULL UNIQUE,
                                     password CHAR(32) NOT NULL,
                                     avatar VARCHAR(255) UNIQUE,
