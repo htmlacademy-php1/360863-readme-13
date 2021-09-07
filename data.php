@@ -1,43 +1,8 @@
 <?php
-$isAuth = rand(0, 1);
+session_start();
+
+
 $userName = 'Леонид'; // укажите здесь ваше имя
-/*$posts = [
-    [
-        'title_post' => 'Цитата',
-        'type_post' => 'post-quote',
-        'content_post' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
-        'username_post' => 'Лариса',
-        'avatar_post' => 'userpic-larisa-small.jpg',
-    ],
-    [
-        'title_post' => 'Игра престолов',
-        'type_post' => 'post-text',
-        'content_post' => 'Не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала, не могу дождаться начала финального сезона своего любимого сериала,  не могу дождаться начала финального сезона своего любимого сериала',
-        'username_post' => 'Владик',
-        'avatar_post' => 'userpic.jpg',
-    ],
-    [
-        'title_post' => 'Наконец, обработал фотки!',
-        'type_post' => 'post-photo',
-        'content_post' => 'rock-medium.jpg',
-        'username_post' => 'Виктор',
-        'avatar_post' => 'userpic-mark.jpg',
-    ],
-    [
-        'title_post' => 'Моя мечта',
-        'type_post' => 'post-photo',
-        'content_post' => 'coast-medium.jpg',
-        'username_post' => 'Лариса',
-        'avatar_post' => 'userpic-larisa-small.jpg',
-    ],
-    [
-        'title_post' => 'Лучшие курсы',
-        'type_post' => 'post-link',
-        'content_post' => 'www.htmlacademy.ru',
-        'username_post' => 'Владик',
-        'avatar_post' => 'userpic.jpg',
-    ],
-];*/
 
 $link = mysqli_connect('localhost', 'root', '', 'readme');
 mysqli_set_charset($link, "utf8");
@@ -90,7 +55,7 @@ $rowsContents = mysqli_fetch_all($resultContentType, MYSQLI_ASSOC);
 
 $paramsIndex = $_GET;
 $paramsIndex['sort'] = $sortDirection == 'ASC' ? 'DESC' : 'ASC';
-$scriptNameIndex = pathinfo('index.php', PATHINFO_BASENAME);
+$scriptNameIndex = pathinfo('popular.php', PATHINFO_BASENAME);
 $urlQueryIndex = http_build_query($paramsIndex);
 $urlSort = "/" . $scriptNameIndex . "?" . $urlQueryIndex;
 

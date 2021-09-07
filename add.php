@@ -9,6 +9,8 @@
 require_once('helpers.php');
 require_once('data.php');
 
+if (isset($_SESSION['user'])) {
+
 $selectedContentType = $_POST['content_type'] ?? 'text';
 $title = $_POST['title'] ?? null;
 $hashtagString = $_POST['hashtag'] ?? null;
@@ -176,6 +178,10 @@ $pageContent = include_template('adding-post.php', [
 echo include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
-    'isAuth' => $isAuth,
     'userName' => $userName,
 ]);
+
+} else {
+    header('Location: http://360863-readme-13/');
+
+}

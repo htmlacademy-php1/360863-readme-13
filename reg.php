@@ -114,10 +114,6 @@ var_dump(mysqli_error($link));
 
 
 
-
-
-
-
 $pageContent = include_template('registration.php', [
     'email' => $email,
     'login' => $login,
@@ -131,7 +127,6 @@ $pageContent = include_template('registration.php', [
 echo include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
-    'isAuth' => $isAuth,
     'userName' => $userName,
 
 ]);

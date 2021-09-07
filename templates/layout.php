@@ -26,14 +26,13 @@
 <header class="header">
     <div class="header__wrapper container">
         <div class="header__logo-wrapper">
-            <a class="header__logo-link" href="main.html">
+            <a class="header__logo-link" href="/">
                 <img class="header__logo" src="img/logo.svg" alt="Логотип readme" width="128" height="24">
             </a>
             <p class="header__topic">
                 micro blogging
             </p>
         </div>
-<!--        --><?php /*var_dump(basename($_SERVER['SCRIPT_FILENAME'])); */?>
         <?php if (basename($_SERVER['SCRIPT_FILENAME']) !== 'reg.php'): ?>
         <form class="header__search-form form" action="#" method="get">
             <div class="header__search">
@@ -48,11 +47,11 @@
             </div>
         </form>
         <div class="header__nav-wrapper">
-            <?php if($isAuth == 1): ?> <!-- здесь должен быть PHP код, который показывает следующий тег по условию -->
+
                 <nav class="header__nav">
                     <ul class="header__my-nav">
                         <li class="header__my-page header__my-page--popular">
-                            <a class="header__page-link header__page-link--active" title="Популярный контент">
+                            <a class="header__page-link header__page-link--active" href="/popular.php" title="Популярный контент">
                                 <span class="visually-hidden">Популярный контент</span>
                             </a>
                         </li>
@@ -72,11 +71,11 @@
                         <li class="header__profile">
                             <a class="header__profile-link" href="#">
                                 <div class="header__avatar-wrapper">
-                                    <img class="header__profile-avatar" src="img/userpic-medium.jpg" alt="Аватар профиля">
+                                    <img class="header__profile-avatar" src="img/<?= $_SESSION['user']['avatar']; ?>" alt="Аватар профиля">
                                 </div>
                                 <div class="header__profile-name">
                                 <span>
-                                    <?= esc($userName); ?> <!--здесь должно быть имя пользователя-->
+                                    <?= $_SESSION['user']['user_name']; ?> <!--здесь должно быть имя пользователя-->
                                 </span>
                                     <svg class="header__link-arrow" width="10" height="6">
                                         <use xlink:href="#icon-arrow-right-ad"></use>
@@ -103,7 +102,7 @@
                                         </li>
 
                                         <li class="header__profile-nav-item">
-                                            <a class="header__profile-nav-link" href="#">
+                                            <a class="header__profile-nav-link" href="/">
                           <span class="header__profile-nav-text">
                             Выход
                           </span>
@@ -118,7 +117,7 @@
                         </li>
                     </ul>
                     <?php endif; ?>
-                    <?php endif; ?>
+
                     <?php if (basename($_SERVER['SCRIPT_FILENAME']) == 'reg.php'): ?>
                     <ul class="header__user-nav">
                         <li class="header__authorization">
