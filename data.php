@@ -55,9 +55,8 @@ $rowsContents = mysqli_fetch_all($resultContentType, MYSQLI_ASSOC);
 
 $paramsIndex = $_GET;
 $paramsIndex['sort'] = $sortDirection == 'ASC' ? 'DESC' : 'ASC';
-$scriptNameIndex = pathinfo('popular.php', PATHINFO_BASENAME);
 $urlQueryIndex = http_build_query($paramsIndex);
-$urlSort = "/" . $scriptNameIndex . "?" . $urlQueryIndex;
+$urlSort = "/" . 'popular.php' . "?" . $urlQueryIndex;
 
 
 /* Создаем массив для страницы поста к самому посту*/

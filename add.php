@@ -154,7 +154,7 @@ SQL;
 
         //при успешной отправке переадресовываем пользователя на новый пост?????????????????????????????
         if ($lastPostId) {
-            header("Location: http://360863-readme-13/post.php?id=$lastPostId");
+            header("Location: /post.php?id=$lastPostId");
             exit;
         } else {
             $errors[] = 'форма не отправлена';
@@ -182,6 +182,6 @@ echo include_template('layout.php', [
 ]);
 
 } else {
-    header('Location: http://360863-readme-13/');
+    header('Location: /');
 
 }

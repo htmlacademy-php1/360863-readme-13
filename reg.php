@@ -103,7 +103,7 @@ var_dump(mysqli_error($link));
 
 //eсли юзер создался переадресовываем на главную страницу
         if ($lastUserId) {
-            header("Location: http://360863-readme-13/index.php");
+            header("Location: /index.php");
             exit;
         } else {
             $regErrors[] = 'форма не отправлена';

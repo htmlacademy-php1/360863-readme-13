@@ -13,7 +13,7 @@ if (isset($_SESSION['user'])) {
 print_r($postRepostSum);
 die();*/
 
-if (!isset($_GET['id']) OR empty($postNums)) {
+if (!isset($_GET['id']) || empty($postNums)) {
     http_response_code(404);
     $pageContent = 'такой страницы нет';
 } else {
@@ -36,7 +36,7 @@ echo include_template('layout.php', [
 ]);
 
 } else {
-    header('Location: http://360863-readme-13/');
+    header('Location: /');
 
 }
 

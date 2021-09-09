@@ -24,6 +24,6 @@ if (isset($_SESSION['user'])) {
         ]);
 
 } else {
-        header('Location: http://360863-readme-13/');
+        header('Location: /');
 
 }
