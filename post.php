@@ -7,11 +7,13 @@
 require_once('helpers.php');
 require_once('data.php');
 
+
+if (isset($_SESSION['user'])) {
 /*echo '<pre>';
 print_r($postRepostSum);
 die();*/
 
-if (!isset($_GET['id']) OR empty($postNums)) {
+if (!isset($_GET['id']) || empty($postNums)) {
     http_response_code(404);
     $pageContent = 'такой страницы нет';
 } else {
@@ -27,12 +29,14 @@ if (!isset($_GET['id']) OR empty($postNums)) {
     ]);
 }
 
-$layoutContent = include_template('layout.php', [
+echo include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
-    'isAuth' => $isAuth,
     'userName' => $userName,
 ]);
 
+} else {
+    header('Location: /');
 
-echo $layoutContent;
+}
+

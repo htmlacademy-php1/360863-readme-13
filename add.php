@@ -9,6 +9,8 @@
 require_once('helpers.php');
 require_once('data.php');
 
+if (isset($_SESSION['user'])) {
+
 $selectedContentType = $_POST['content_type'] ?? 'text';
 $title = $_POST['title'] ?? null;
 $hashtagString = $_POST['hashtag'] ?? null;
@@ -152,7 +154,7 @@ SQL;
 
         //при успешной отправке переадресовываем пользователя на новый пост?????????????????????????????
         if ($lastPostId) {
-            header("Location: http://360863-readme-13/post.php?id=$lastPostId");
+            header("Location: /post.php?id=$lastPostId");
             exit;
         } else {
             $errors[] = 'форма не отправлена';
@@ -176,6 +178,10 @@ $pageContent = include_template('adding-post.php', [
 echo include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
-    'isAuth' => $isAuth,
     'userName' => $userName,
 ]);
+
+} else {
+    header('Location: /');
+
+}
