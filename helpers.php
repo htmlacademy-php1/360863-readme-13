@@ -262,3 +262,43 @@ function generate_random_date($index)
 
     return $dt;
 }
+
+set_exception_handler(function (Exception $exception) {
+    echo include_template('layout.php', [
+        'title' => 'Error',
+        'content' => include_template('error.php', [
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage(),
+        ]),
+    ]);
+});
+
+function cutText($str, &$isCut, $length = 300)
+{
+    $isCut = false;
+
+    if (mb_strlen($str) <= $length) {
+
+        return $str;
+    }
+
+    $strArray = explode(' ', $str);
+    $textLength = 0;
+
+    foreach ($strArray as $index => $word) {
+        $textLength += mb_strlen($word);
+        if ($textLength >= $length){
+            $isCut = true;
+
+            return implode(" ", array_slice($strArray, 0, $index)) . '...';
+        }
+    }
+
+    return null;
+}
+
+function esc($str) {
+    $text = htmlspecialchars($str);
+
+    return $text;
+}

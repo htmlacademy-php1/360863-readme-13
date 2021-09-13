@@ -123,6 +123,15 @@ VALUES
   (3, 5),
   (3, 6);
 
+INSERT INTO post_hashtags (post_id, hashtag_id)
+VALUES
+  (4, 1),
+  (4, 2),
+  (4, 3),
+  (4, 4),
+  (4, 5),
+  (4, 6);
+
 /* Добавляем подписчиков */
 
 INSERT INTO subscription (author_id, person_subscripted_id)

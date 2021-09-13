@@ -2,13 +2,12 @@
 <?php
 /**
  * @var bool $isAuth
- * @var string $userName
  * @var array $rows
  * @var array $rowsContents
  */
 
 require_once('helpers.php');
-require_once('data.php');
+require_once('link.php');
 
 if (isset($_SESSION['user'])) {
 
@@ -19,7 +18,6 @@ if (isset($_SESSION['user'])) {
     echo include_template('layout.php', [
         'title' => 'readme: популярное',
         'content' => $pageContent,
-        'userName' => $userName,
 
         ]);
 

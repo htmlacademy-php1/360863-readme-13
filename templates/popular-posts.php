@@ -1,7 +1,6 @@
 <?php
 /**
  * @var bool $isAuth
- * @var string $userName
  * @var string $title
  * @var string $content
  * @var array $rows
@@ -48,7 +47,7 @@
             <b class="popular__filters-caption filters__caption">Тип контента:</b>
             <ul class="popular__filters-list filters__list">
                 <li class="popular__filters-item popular__filters-item--all filters__item filters__item--all">
-                    <a class="filters__button filters__button--ellipse filters__button--all <?=$selectedContentType ? '' : 'filters__button--active'; ?>" href="/">
+                    <a class="filters__button filters__button--ellipse filters__button--all <?=$selectedContentType ? '' : 'filters__button--active'; ?>" href="/popular.php">
                         <span>Все</span>
                     </a>
                 </li>
@@ -79,7 +78,7 @@
 
         <?php foreach ($rows as $index => $row): ?>
             <?php $today = new DateTimeImmutable(); ?>
-            <?php $postDate = new DateTime(generate_random_date ($index)); ?>
+            <?php $postDate = new DateTime($row['created_at']); ?>
             <article class="popular__post post post-<?=$row['content_class'];?>">
                 <header class="post__header">
                     <h2><a href="/post.php?id=<?=$row['id']; ?>"><?=esc($row['post_title']);?><!--здесь заголовок--></a></h2>

@@ -2,11 +2,10 @@
 
 /**
  * @var bool $isAuth
- * @var string $userName
  */
 
 require_once('helpers.php');
-require_once('data.php');
+require_once('link.php');
 
 $_SESSION = [];
 

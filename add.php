@@ -1,20 +1,27 @@
 <?php
 /**
  * @var bool $isAuth
- * @var string $userName
  * @var array $rows
  * @var array $rowsContents
  */
 
 require_once('helpers.php');
-require_once('data.php');
+require_once('link.php');
+
+$sqlContentType = <<<SQL
+SELECT *
+FROM content_type
+SQL;
+
+$resultContentType = mysqli_query($link, $sqlContentType);
+$rowsContents = mysqli_fetch_all($resultContentType, MYSQLI_ASSOC);
 
 if (isset($_SESSION['user'])) {
 
 $selectedContentType = $_POST['content_type'] ?? 'text';
 $title = $_POST['title'] ?? null;
 $hashtagString = $_POST['hashtag'] ?? null;
-$imageUrl = $_POST['image_url'] ?? null; //http://somesite.com/img.png
+$imageUrl = $_POST['image_url'] ?? null;
 $youtube = $_POST['youtube'] ?? null;
 $text = $_POST['text'] ?? null;
 $quoteAuthor = $_POST['quote_author'] ?? null;
@@ -162,6 +169,7 @@ SQL;
     }
 }
 
+
 $pageContent = include_template('adding-post.php', [
     'rowsContents' => $rowsContents,
     'selectedContentType' => $selectedContentType,
@@ -178,7 +186,6 @@ $pageContent = include_template('adding-post.php', [
 echo include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
-    'userName' => $userName,
 ]);
 
 } else {
