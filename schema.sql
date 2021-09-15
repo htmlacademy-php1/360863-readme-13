@@ -116,11 +116,4 @@ CREATE TABLE IF NOT EXISTS `message` (
 
 
 
-
-
-
-
-
-
-
-© 2021 GitHub, Inc.
+CREATE FULLTEXT INDEX posts_ft_search ON posts(title, text);

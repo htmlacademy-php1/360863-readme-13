@@ -1,20 +1,13 @@
-<!--Ошибки:
-1. Загружает вместо изображения любой файл
-5. Как определить условие, что если пользователь находится на конкретной странице, то ему не показывать что-то из html кода
--->
-
-
 
 <?php
 /**
  * @var bool $isAuth
- * @var string $userName
  * @var array $rows
  * @var array $rowsContents
  */
 
 require_once('helpers.php');
-require_once('data.php');
+require_once('link.php');
 
 /*echo '<pre>';
 print_r($rowsContents);
@@ -127,6 +120,5 @@ $pageContent = include_template('registration.php', [
 echo include_template('layout.php', [
     'title' => 'readme: популярное',
     'content' => $pageContent,
-    'userName' => $userName,
 
 ]);

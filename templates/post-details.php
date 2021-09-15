@@ -89,7 +89,7 @@
                     </div>
                     <ul class="post__tags">
                         <?php foreach ($postHashtags as $postHashtag) : ?>
-                        <li><a href="#"><?=$postHashtag['hashtag'];?></a>
+                        <li><a href="/search.php?search=<?=str_replace('#', '', $postHashtag['hashtag']);?>"><?=$postHashtag['hashtag'];?></a>
                             <?php endforeach; ?>
                     </ul>
                     <div class="comments">
